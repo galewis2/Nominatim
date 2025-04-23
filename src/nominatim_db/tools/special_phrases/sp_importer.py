@@ -104,7 +104,6 @@ class SPImporter():
         query = """
             SELECT table_name
             FROM information_schema.tables
-            WHERE table_schema='public'
             AND table_name like 'place_classtype_%';
         """
         with self.db_connection.cursor() as db_cursor:

@@ -164,7 +164,6 @@ def test_remove_non_existent_tables_from_db(sp_importer, default_phrases,
     query_tables = """
         SELECT table_name
         FROM information_schema.tables
-        WHERE table_schema='public'
         AND table_name like 'place_classtype_%';
     """
 

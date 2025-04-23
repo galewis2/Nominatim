@@ -46,7 +46,7 @@ def table_exists(conn: Connection, table: str) -> bool:
     num = execute_scalar(
         conn,
         """SELECT count(*) FROM pg_tables
-           WHERE tablename = %s and schemaname = 'public'""", (table, ))
+           WHERE tablename = %s""", (table, ))
     return num == 1 if isinstance(num, int) else False
 
 
@@ -67,7 +67,7 @@ def index_exists(conn: Connection, index: str, table: Optional[str] = None) -> b
     """
     with conn.cursor() as cur:
         cur.execute("""SELECT tablename FROM pg_indexes
-                       WHERE indexname = %s and schemaname = 'public'""", (index, ))
+                       WHERE indexname = %s""", (index, ))
         if cur.rowcount == 0:
             return False
 

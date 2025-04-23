@@ -32,7 +32,7 @@ def _get_tables(conn: Connection) -> Set[str]:
     """ Return the set of tables currently in use.
     """
     with conn.cursor() as cur:
-        cur.execute("SELECT tablename FROM pg_tables WHERE schemaname = 'public'")
+        cur.execute("SELECT tablename FROM pg_tables")
 
         return set((row[0] for row in list(cur)))
 
