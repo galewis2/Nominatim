@@ -131,7 +131,7 @@ def setup_country_tables(dsn: str, sql_dir: Path, ignore_partitions: bool = Fals
         register_hstore(conn)
         with conn.cursor() as cur:
             cur.execute(
-                """ CREATE TABLE public.country_name (
+                """ CREATE TABLE country_name (
                         country_code character varying(2),
                         name public.hstore,
                         derived_name public.hstore,
@@ -139,7 +139,7 @@ def setup_country_tables(dsn: str, sql_dir: Path, ignore_partitions: bool = Fals
                         partition integer
                     ); """)
             cur.executemany(
-                """ INSERT INTO public.country_name
+                """ INSERT INTO country_name
                     (country_code, name, country_default_language_code, partition)
                     VALUES (%s, %s, %s, %s)
                 """, params)
