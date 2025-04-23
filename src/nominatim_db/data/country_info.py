@@ -133,8 +133,8 @@ def setup_country_tables(dsn: str, sql_dir: Path, ignore_partitions: bool = Fals
             cur.execute(
                 """ CREATE TABLE country_name (
                         country_code character varying(2),
-                        name public.hstore,
-                        derived_name public.hstore,
+                        name hstore,
+                        derived_name hstore,
                         country_default_language_code text,
                         partition integer
                     ); """)
