@@ -26,6 +26,8 @@ def run_osm2pgsql(options: Mapping[str, Any]) -> None:
     """
     _check_osm2pgsql_version(options['osm2pgsql'])
 
+    env = get_pg_env(options['dsn'])
+    
     cmd = [_find_osm2pgsql_cmd(options['osm2pgsql']),
            '--append' if options['append'] else '--create',
            '--slim',
