@@ -111,7 +111,7 @@ class ICUTokenizer(AbstractTokenizer):
                 LOG.info('Computing word frequencies')
                 drop_tables(conn, 'word_frequencies')
                 cur.execute("""
-                  CREATE TABLE word_frequencies AS
+                  CREATE TEMP TABLE word_frequencies AS
                   WITH word_freq AS MATERIALIZED (
                            SELECT unnest(name_vector) as id, count(*)
                                  FROM search_name GROUP BY id),
@@ -130,7 +130,7 @@ class ICUTokenizer(AbstractTokenizer):
                 cur.execute('ANALYSE word_frequencies')
                 LOG.info('Update word table with recomputed frequencies')
                 drop_tables(conn, 'tmp_word')
-                cur.execute("""CREATE TEMP TABLE tmp_word AS
+                cur.execute("""CREATE TABLE tmp_word AS
                                 SELECT word_id, word_token, type, word,
                                        coalesce(word.info, '{}'::jsonb)
                                        - 'count' - 'addr_count' ||
