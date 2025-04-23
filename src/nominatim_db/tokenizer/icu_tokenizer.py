@@ -111,7 +111,7 @@ class ICUTokenizer(AbstractTokenizer):
                 LOG.info('Computing word frequencies')
                 drop_tables(conn, 'word_frequencies')
                 cur.execute("""
-                  CREATE TEMP TABLE word_frequencies AS
+                  CREATE TABLE word_frequencies AS
                   WITH word_freq AS MATERIALIZED (
                            SELECT unnest(name_vector) as id, count(*)
                                  FROM search_name GROUP BY id),
