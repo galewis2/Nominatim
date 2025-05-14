@@ -32,7 +32,7 @@ def run_osm2pgsql(options: Mapping[str, Any]) -> None:
            '--append' if options['append'] else '--create',
            '--slim',
            '--log-progress', 'true',
-           '--schema', 'nominatim',
+           '--schema', os.environ["NOMINATIMSCHEMA"],
            '--number-processes', '1' if options['append'] else str(options['threads']),
            '--cache', str(options['osm2pgsql_cache']),
            '--style', str(options['osm2pgsql_style'])
